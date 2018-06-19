@@ -1,0 +1,23 @@
+dn: ou=people,dc=example,dc=org
+objectClass: organizationalUnit
+objectClass: top
+
+dn: ou=groups,dc=example,dc=org
+objectClass: organizationalUnit
+objectClass: top
+
+dn: cn=cmceniry,ou=people,dc=example,dc=org
+objectClass: person
+cn: cmceniry
+sn: McEniry
+
+dn: cn=mac,ou=people,dc=example,dc=org
+objectClass: person
+cn: mac
+sn: McEniry
+
+dn: cn=mygroup,ou=groups,dc=example,dc=org
+objectClass: top
+objectClass: groupOfNames
+cn: group1
+member: cn=mac,ou=people,dc=example,dc=org
