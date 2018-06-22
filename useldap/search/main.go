@@ -34,7 +34,8 @@ func main() {
 	// tag::search[]
 	results, err := l.Search(ldap.NewSearchRequest(
 		"ou=people,dc=example,dc=org",
-		ldap.ScopeWholeSubtree, ldap.NeverDerefAliases, 0, 0, false,
+		ldap.ScopeWholeSubtree, ldap.NeverDerefAliases,
+		0, 0, false,
 		fmt.Sprintf("(cn=%s)", os.Args[1]),
 		nil, nil,
 	))

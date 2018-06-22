@@ -36,7 +36,8 @@ func main() {
 	// tag::search[]
 	results, err := l.Search(ldap.NewSearchRequest(
 		"ou=groups,dc=example,dc=org",
-		ldap.ScopeWholeSubtree, ldap.NeverDerefAliases, 0, 0, false,
+		ldap.ScopeWholeSubtree, ldap.NeverDerefAliases,
+		0, 0, false,
 		"(cn=mygroup)",
 		nil, nil,
 	))
@@ -48,7 +49,8 @@ func main() {
 		panic("group not found")
 	}
 	// tag::exist[]
-	for _, v := range results.Entries[0].GetAttributeValues("member") {
+	members := results.Entries[0].GetAttributeValues("member")
+	for _, v := range members {
 		if v == os.Args[1] {
 			os.Exit(0)
 		}
@@ -56,7 +58,9 @@ func main() {
 	// end::exist[]
 
 	// tag::modify[]
-	m := ldap.NewModifyRequest("cn=mygroup,ou=groups,dc=example,dc=org")
+	m := ldap.NewModifyRequest(
+		"cn=mygroup,ou=groups,dc=example,dc=org",
+	)
 	m.Add("member", []string{os.Args[1]})
 	err = l.Modify(m)
 	if err != nil {
